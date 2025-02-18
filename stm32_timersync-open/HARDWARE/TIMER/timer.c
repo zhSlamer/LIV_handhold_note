@@ -94,31 +94,30 @@ void TIM3_IRQHandler(void)   //TIM3中断
 {
 
 
-		if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET) //检查指定的TIM中断发生与否:TIM 中断源 
-		{
+	if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET) //检查指定的TIM中断发生与否:TIM 中断源 
+	{
 		TIM_ClearITPendingBit(TIM3, TIM_IT_Update  );  //清除TIMx的中断待处理位:TIM 中断源 
 		LED1=!LED1;
 			
-			//var_Exp 做半曝光时长的相移操作
+		//var_Exp 做半曝光时长的相移操作
 		TIM2->CNT=TIM2->ARR/2;
 
 		PCout(13)=0;
-		}
+	}
 		
 		
-		//global_time++;
-		//shorttt=0;
-		//sprintf(snum, "%06d", global_time); //产生："000011D7"
-		//snum[6]=0;
-		//printf("$GPRMC,");
-	  //printf(snum);
-		//printf(".00,A,2237.496474,N,11356.089515,E,0.0,225.5,310518,2.3,W,A*23\n");
+	//global_time++;
+	//shorttt=0;
+	//sprintf(snum, "%06d", global_time); //产生："000011D7"
+	//snum[6]=0;
+	//printf("$GPRMC,");
+	//printf(snum);
+	//printf(".00,A,2237.496474,N,11356.089515,E,0.0,225.5,310518,2.3,W,A*23\n");
 		
-
 		
-		//************************************* add *********************************************
-		//UTCtime format: hhmmss
-		
+	//************************************* add *********************************************
+	//UTCtime format: hhmmss
+	// UTC时间更新	
     if(ss<59){
 				ss++;
 		}else{
@@ -136,19 +135,18 @@ void TIM3_IRQHandler(void)   //TIM3中断
 		}
 		
     sprintf(value_2, "%s%02d%02d%02d%s", gprmcStr, hh, mm, ss, ".00,A,2237.496474,N,11356.089515,E,0.0,225.5,230520,2.3,W,A*");
-		strcpy(value_1,value_2);
-	  chckNum =checkNum(value_1);
-	  sprintf(chckNumChar, "%02X", chckNum);
-		printf("%s", value_2);
+	strcpy(value_1,value_2);
+	chckNum =checkNum(value_1);
+	sprintf(chckNumChar, "%02X", chckNum);
+	printf("%s", value_2);
     printf("%s\n", chckNumChar);
-	 
 		
-	  //**********************************************************************************
+	//**********************************************************************************
 
-		/**
+	/**
 		chckNum=checkNum(test);	
-	  sprintf(chckNumChar, "%02X", chckNum);
-    printf("%s\n", chckNumChar);
+		sprintf(chckNumChar, "%02X", chckNum);
+		printf("%s\n", chckNumChar);
     */
 }
 
