@@ -117,7 +117,7 @@ void TIM3_IRQHandler(void)   //TIM3中断
 		
 	//************************************* add *********************************************
 	//UTCtime format: hhmmss
-	// UTC时间更新	
+	// UTC时间更新	1Hz 1次/S
     if(ss<59){
 				ss++;
 		}else{
@@ -138,8 +138,8 @@ void TIM3_IRQHandler(void)   //TIM3中断
 	strcpy(value_1,value_2);
 	chckNum =checkNum(value_1);
 	sprintf(chckNumChar, "%02X", chckNum);
-	printf("%s", value_2);
-    printf("%s\n", chckNumChar);
+	printf("%s", value_2);			// 为了能够将 printf 的输出重定向到串口，必须重写 fputc 函数，将字符发送到串口数据寄存器
+    printf("%s\n", chckNumChar);	
 		
 	//**********************************************************************************
 

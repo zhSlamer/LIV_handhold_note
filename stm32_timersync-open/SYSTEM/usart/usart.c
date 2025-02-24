@@ -38,7 +38,7 @@ _sys_exit(int x)
 { 
 	x = x; 
 } 
-//重定义fputc函数 
+//重定义fputc函数 - 将printf的标准输出 重定向至串口UART1
 int fputc(int ch, FILE *f)
 {      
 	while((USART1->SR&0X40)==0);//循环发送,直到发送完毕   
